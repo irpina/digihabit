@@ -1,10 +1,10 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later */
-/* DigiHabit: a Habit-style echo collector for the Digitone mk1's inputs, on the pedal shell (pedal.h). Shared by
+/* DigiHoard: an echo collector for the Digitone mk1's inputs, on the pedal shell (pedal.h). Shared by
  * dsp.c (the render, interrupt level) and ui.c (the UI task). */
-#ifndef DHABIT_H
-#define DHABIT_H
+#ifndef DHOARD_H
+#define DHOARD_H
 
-#define PD(x) dhabit_##x
+#define PD(x) dhoard_##x
 #include "pedal.h"
 
 /* The buffers: the region mod.json claims in the profile's bulk area (0x46200000-0x47300000). The OS never clears
@@ -29,7 +29,7 @@ enum { O_BANK, O_NUM, O_MODE, O_SCAN, O_MEM, O_LOOP, O_RAMP, O_SHAPE };         
 enum { BANK_A, BANK_OFF, BANK_B };
 enum { MODE_IN, MODE_OUT, MODE_FEED };
 enum { SCAN_AUTO, SCAN_MAN };
-enum { MEM_NORM, MEM_CLCT, MEM_ALWS, MEM_BOTH };        /* the COLLECT and ALWAYS dips */
+enum { MEM_NORM, MEM_CLCT, MEM_ALWS, MEM_BOTH };        /* the COLLECT and ALWAYS options */
 enum { LOOP_MOM, LOOP_LTCH };
 enum { RT_OFF, RT_RPTS, RT_SIZE, RT_MOD, RT_SPRD, RT_SCAN };        /* the knob RAMP moves */
 enum { SH_RUP, SH_RDN, SH_BTOP, SH_BBOT, SH_RAND, SH_SQR };          /* ramp up or down once; bounce */

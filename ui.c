@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later */
-/* DigiHabit's UI, on the pedal shell (pedal_ui.inc: the pages, SETUP, presets, TAP, BYPASS, the owner):
+/* DigiHoard's UI, on the pedal shell (pedal_ui.inc: the pages, SETUP, presets, TAP, BYPASS, the owner):
  *
- *   1 HABIT     VOLUME REPEATS SIZE MOD / SPREAD SCAN RAMP MIX
+ *   1 HOARD     VOLUME REPEATS SIZE MOD / SPREAD SCAN RAMP MIX
  *   2 SECONDARY WIDTH KEEP (COLLECT's) M-DRY (the memory dry's level) OUT / TONE GLIDE STAY (AUTO's) INPUT
  *   3 SWITCHES  BANK (A, OFF, B) NUMBER (1-3) MODE (IN, OUT, FEED) SCAN (AUTO, MANUAL) /
  *               MEMORY (NORM, COLLECT, ALWAYS, both) LOOP (MOMENTARY, LATCH) RAMP (the knob it moves) SHAPE
@@ -12,26 +12,26 @@
  *   T4 tap: the modifiers off or on; hold: WIPE (the memory alone) while held
  *   trig 1-3  A1-A3, trig 4-6 B1-B3, trig 7 the modifiers off; trig 8-10 IN, OUT, FEED; trig 11 SCAN AUTO or
  *   MANUAL; trig 12 COLLECT; trig 13 ALWAYS; trig 14 LATCH
- *   MIDI: the Habit's chart: VOLUME 14, REPEATS 15, SIZE 16, MOD 17, SPREAD 18, SCAN 19, RAMP 20, MOD NUMBER 21,
+ *   MIDI: its chart: VOLUME 14, REPEATS 15, SIZE 16, MOD 17, SPREAD 18, SCAN 19, RAMP 20, MOD NUMBER 21,
  *   MOD BANK 22, MODE 23 (1, 2, 3), LOOP 24, SCAN (left hold) 25, CLEAR 26, MIDI CLOCK IGNORE 51, TAP 93,
  *   EXPRESSION 100, BYPASS 102; and MIX 27, SCAN's mode 28, COLLECT 29 */
 #pragma GCC optimize ("no-tree-loop-distribute-patterns")
-#include "dhabit.h"
+#include "dhoard.h"
 #include "tables.h"
 
 #define PD_TAG      0x44484142u             /* "DHAB" */
-#define PD_NAME     "DIGIHABIT"
+#define PD_NAME     "DIGIHOARD"
 #define PD_SAVE_VER 1
 #define PD_KBIP     (1 << K_MOD)
 #define PD_SBIP     0
 #define PD_NCFG     2
 
-/* The Mod Menu's DIGIHABIT: a reel of tape and the echoes trailing from it */
+/* The Mod Menu's DIGIHOARD: a reel of tape and the echoes trailing from it */
 static const u16 pd_icon[16] = {
     0x0000, 0x0f00, 0x30c0, 0x4020, 0x4920, 0x8010, 0x9690, 0x8010,
     0x4920, 0x4020, 0x30c0, 0x0f00, 0x0000, 0xfdb5, 0x0000, 0x0000
 };
-static const char *const pd_title[3] = { "Habit", "Secondary", "Switches" };
+static const char *const pd_title[3] = { "Hoard", "Secondary", "Switches" };
 static const char *const pd_klbl[8] = { "VOL", "RPTS", "SIZE", "MOD", "SPRD", "SCAN", "RAMP", "MIX" };
 static const u8 pd_kdef[8] = PD_KDEF;
 static const char *const pd_slbl[8] = { "WIDE", "KEEP", "MDRY", "OUT", "TONE", "GLID", "STAY", "INPT" };
@@ -147,7 +147,7 @@ static void fx_trig(int n)
     }
 }
 
-static int three(int v)                     /* the Habit's 1, 2, 3 (0 as 1); a sweep in thirds */
+static int three(int v)                     /* the positions 1, 2, 3 (0 as 1); a sweep in thirds */
 {
     if (v <= 3)
         return v <= 1 ? 0 : v - 1;
@@ -206,7 +206,7 @@ static int fx_value(void *bmp, const void *font, int x, int y, int pg, int i)
         return 0;
     v = ST.knob[i];
     if (i == K_SIZE) {
-        if (dhabit_tempo()) {
+        if (dhoard_tempo()) {
             int d = v * 13 / 128;
             TEXTF(bmp, font, x, y, -1, "%s", divs[d > 12 ? 12 : d]);
         } else {

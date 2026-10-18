@@ -1,38 +1,37 @@
-# DigiHabit
+# DigiHoard
 
-An echo collector for the Digitone mk1's audio inputs, after the
-[Chase Bliss Habit](https://www.chasebliss.com/habit): a delay with a
+An echo collector for the Digitone mk1's audio inputs: a delay with a
 memory. Everything you play goes into a 3-minute memory, always, and the
 echo plays from it: SCAN reaches back into the memory (by itself, now and
 then, or where you put it), SPREAD adds a second echo further back, six
 modifiers bend the echoes after the delay, inside its feedback or round the
 whole memory, and COLLECT turns the memory into an overdubbing song
-sketchpad. With LOOP, CLEAR, RAMP and bounce, presets and the Habit's MIDI
-CCs. DigiHabit is an elekloader mod for core-dn1 3.2. It is not affiliated
-with Chase Bliss and uses none of its code; the pedal is rebuilt from the
-Habit's public manual and MIDI manual.
+sketchpad. With LOOP, CLEAR, RAMP and bounce, presets and MIDI CCs.
+DigiHoard is an elekloader mod for core-dn1 3.2.
 
-DIGIHABIT is an entry in core-dn1's Mod Menu (hold a track key). While its
-page is open, DigiHabit owns the audio engine, as DigiCosm and DigiChroma do
+Its MIDI CCs follow the Chase Bliss Habit's published CC chart, so a controller set up for that pedal works with it too. DigiHoard is not affiliated with Chase Bliss and uses none of its code.
+
+DIGIHOARD is an entry in core-dn1's Mod Menu (hold a track key). While its
+page is open, DigiHoard owns the audio engine, as DigiSwarm and DigiPrism do
 (core-dn1 3.2's `core_audio`): the synths are silent, the Digitone's own
 effects are off, and what you hear is the inputs through the pedal. NO gives
 the audio and the screen back. The sequencer keeps running, so PLAY, STOP
 and TEMPO still work and SIZE can follow the Digitone's tempo. Opening the
 page steps the pedal on.
 
-**DigiHabit 0.1 is a beta (a pre-release).** It runs on a Digitone mk1, its
-author's, where it loads and works as expected, and was checked in digikit's
-emulator ([digiemu](https://github.com/irpina/digiemu)) on OS 1.43 and 1.44.
-Its source is also in elekloader, as `mods/digihabit-dn1`
-([irpina/elekloader#96](https://github.com/irpina/elekloader/pull/96)).
+**DigiHoard 0.1.1 is a beta (a pre-release).** It is the same code as 0.1 under
+its own name, with its own names for the effects; only names changed. 0.1
+runs on a Digitone mk1, its author's, where it loads and works as expected,
+and 0.1.1 was checked in digikit's emulator
+([digiemu](https://github.com/irpina/digiemu)) on OS 1.43 and 1.44. Its
+source is also in elekloader, as
+[mods/digihoard-dn1](https://github.com/irpina/elekloader/tree/main/mods/digihoard-dn1).
+A project saved with 0.1 loads in 0.1.1.
 
-![DIGIHABIT in core-dn1's Mod Menu](docs/mod-menu.png)
-![Page 1: VOLUME, REPEATS, SIZE, MOD / SPREAD, SCAN, RAMP, MIX](docs/page1.png)
-![Page 2: the hidden options](docs/page2.png)
-![Page 3: the modifier's bank and number, MODE, SCAN and the switches](docs/page3.png)
-![The memory filling, with SCAN and SPREAD reading it](docs/heaviest.png)
-![T2 held: LOOP](docs/loop.png)
-![T1 held: SCAN all the way](docs/scan.png)
+![DIGIHOARD in core-dn1's Mod Menu](docs/mod-menu.png)
+![Page 1](docs/page1.png)
+![Page 2](docs/page2.png)
+![Page 3](docs/page3.png)
 ![SETUP](docs/setup.png)
 
 The screenshots are from the emulator, which has no DMA timer 0, so the `C`
@@ -44,15 +43,16 @@ there.
 You need:
 - **elekloader from its main branch,** with Python 3.9 or newer (see
   [its README](https://github.com/irpina/elekloader#install)), or elekloader's
-  web page, which runs it. DigiHabit keeps 17 MB of buffers in the Digitone
+  web page, which runs it. DigiHoard keeps 17 MB of buffers in the Digitone
   profile's `bulk` area, which the 0.4.0 app does not know: it refuses
-  DigiHabit.
+  DigiHoard.
 - **This mod and its core,** from
-  [this repository's releases](https://github.com/irpina/digihabit/releases):
-  `digihabit-0.1.elemod` and `core-dn1-3.2.elemod` for OS 1.43, or
-  `digihabit-0.1-os1.44.elemod` and `core-dn1-3.2-os1.44.elemod` for 1.44.
-  DigiHabit needs core-dn1 3.2 or newer. With several effects mods in one build
-  (the other pedals, DigiCosm, DigiChroma), take core-dn1 4.0 from
+  [this repository's releases](https://github.com/irpina/digihoard/releases):
+  `digihoard-0.1.1.elemod` and `core-dn1-3.2.elemod` for OS 1.43, or
+  `digihoard-0.1.1-os1.44.elemod` and `core-dn1-3.2-os1.44.elemod` for 1.44.
+  DigiHoard needs core-dn1 3.2 or newer. With several effects mods in one build
+  (DigiSwarm, DigiPrism, DigiTide, DigiTriad, DigiReel, DigiHoard,
+  DigiHalo), take core-dn1 4.0 from
   [elekloader's pre-release](https://github.com/irpina/elekloader/releases/tag/core-dn1-v4.0)
   instead: it has the RAM for them.
 - **The stock OS file:** `Digitone_and_Digitone_Keys_OS1.44.syx` or
@@ -61,12 +61,12 @@ You need:
   elekloader recognises the file by its hash.
 
 Build your OS on the command line (or in elekloader's window, run from
-source: **+ Install from file...** both files and tick **digihabit**):
+source: **+ Install from file...** both files and tick **digihoard**):
 
 ```bash
 python -m elekloader.patch --stock Digitone_and_Digitone_Keys_OS1.44.syx \
-    --mod core-dn1-3.2-os1.44.elemod --mod digihabit-0.1-os1.44.elemod \
-    --out Digitone_OS1.44-digihabit.syx --version HA01
+    --mod core-dn1-3.2-os1.44.elemod --mod digihoard-0.1.1-os1.44.elemod \
+    --out Digitone_OS1.44-digihoard.syx --version HO01
 ```
 
 `--version` is the 4 characters the unit will show. Flash the `.syx` with
@@ -80,10 +80,10 @@ startup menu, and press **TRIG 4** for OS UPGRADE. Then send the stock
 `.syx` with Transfer.
 
 **Opening it:** hold a track key on its own for the Mod Menu, then pick
-DIGIHABIT with its trig key (or YES). NO closes it and gives the synths
+DIGIHOARD with its trig key (or YES). NO closes it and gives the synths
 back.
 
-## How it works, as the Habit
+## How it works
 
 ```
 INPUT -> MEMORY (3 minutes) -> primary head (SCAN)    -> ECHO (SIZE, REPEATS, MOD) -> left
@@ -92,7 +92,7 @@ INPUT -> MEMORY (3 minutes) -> primary head (SCAN)    -> ECHO (SIZE, REPEATS, MO
 ```
 
 - **The memory** records the inputs (as mono) all the time the pedal is on.
-  Bypassing dumps it, as the Habit's does, unless COLLECT or ALWAYS is on:
+  Bypassing dumps it, unless COLLECT or ALWAYS is on:
   with COLLECT bypassing pauses it, with ALWAYS it keeps recording while
   bypassed. The left column shows how full it is (a bar from 0 to 3
   minutes) and where the heads play in it (marks from the bottom, now, to
@@ -103,7 +103,7 @@ INPUT -> MEMORY (3 minutes) -> primary head (SCAN)    -> ECHO (SIZE, REPEATS, MO
   always away. MANUAL: the knob picks the moment, from now (left) to 3
   minutes ago (right), like a pre-delay. Either way the distance is a whole
   number of SIZEs, so what comes back stays in time, and a head travelling
-  through the memory scrubs: the Habit's cloudy scanning sound (GLIDE sets
+  through the memory scrubs: a cloudy scanning sound (GLIDE sets
   how fast; a long way it jumps, crossfaded, and scrubs the last quarter
   second). Nothing comes back from where the memory is still empty.
 - **SPREAD** adds the secondary head, behind the primary by the knob's
@@ -117,8 +117,8 @@ INPUT -> MEMORY (3 minutes) -> primary head (SCAN)    -> ECHO (SIZE, REPEATS, MO
   REPEATS is the feedback, holding at the top (an endless build-up, kept
   under full scale). VOLUME is the echoes' level and MIX the balance: up to
   the middle the dry stays whole and the echoes come in; past it the dry
-  goes, to fully wet at the top (the Habit's DRY KILL).
-- **MODE** (the Habit's IN, OUT, FEED toggle): OUT applies the modifier to
+  goes, to fully wet at the top.
+- **MODE** (IN, OUT, FEED): OUT applies the modifier to
   what the echo plays, the same on every echo; IN puts it inside the
   feedback, so it accumulates echo by echo; FEED sends the echoes back into
   the memory, so REPEATS is the whole loop's feedback, everything you do is
@@ -126,7 +126,7 @@ INPUT -> MEMORY (3 minutes) -> primary head (SCAN)    -> ECHO (SIZE, REPEATS, MO
 
 ## The modifiers
 
-Bank A or B and number 1-3, as the Habit's toggles (or trig 1-6); MOD is the
+Bank A or B and number 1-3 (or trig 1-6); MOD is the
 amount, neutral at noon, with a different behaviour each side.
 
 | | Left of noon | Right of noon |
@@ -138,8 +138,8 @@ amount, neutral at noon, with a different behaviour each side.
 | B2 FILTER | a resonant low-pass, 8 kHz down to 125 Hz | a resonant high-pass, 40 Hz up to 2 kHz |
 | B3 DROPPER | random drops, more and shorter as MOD grows | a pattern of drops, the same in every echo |
 
-In IN and FEED the filter's resonance can pile up into oscillation, as the
-Habit's does; it stays under full scale.
+In IN and FEED the filter's resonance can pile up into oscillation; it
+stays under full scale.
 
 ## The page
 
@@ -155,13 +155,13 @@ pushing a knob sets it back to its default.
 
 | Page | Knobs A-D | Knobs E-H |
 |---|---|---|
-| 1 Habit | VOL (the echoes' level), RPTS (REPEATS), SIZE, MOD | SPRD (SPREAD), SCAN, RAMP (its speed), MIX |
+| 1 Hoard | VOL (the echoes' level), RPTS (REPEATS), SIZE, MOD | SPRD (SPREAD), SCAN, RAMP (its speed), MIX |
 | 2 Secondary | WIDE (the echoes' placement), KEEP (how much COLLECT keeps of the old), MDRY (the memory dry's level), OUT | TONE (darkens the feedback), GLID (how fast the heads travel), STAY (how long AUTO stays away), INPT (the level into the memory) |
 | 3 Switches | BANK (A, OFF, B), NUM (1-3), MODE (IN, OUT, FEED), SCAN (AUTO, MAN) | MEM (NORM, CLCT, ALWS, C+A), LOOP (MOM, LTCH), RAMP (which knob: OFF, RPTS, SIZE, MOD, SPRD, SCAN), SHAP |
 
 SETUP (YES) adds two rows after the shell's: MEM DRY (SCANNING: the heads
 are heard directly while they move; OFF; ON) and WIPE (the echo muted, the
-memory alone, as the Habit's dip).
+memory alone).
 
 **RAMP** moves the knob page 3 names. SHAP: UP and DOWN ramp once, from the
 bottom or the top to where the knob is, each time the pedal steps on; BNC+
@@ -169,29 +169,29 @@ bounces between the knob and the top, BNC- between the knob and the bottom,
 RAND jumps to random places between the knob and the top, SQR alternates
 the two. RAMP is the speed: a cycle of 50 s to 0.2 s.
 
-| Habit | DigiHabit |
+| Function | On DigiHoard |
 |---|---|
-| Left footswitch: tap (two taps set SIZE) | T1 tapped: the tempo (SIZE follows it through its division; or trig 15) |
-| Left footswitch held: scan, as SCAN at its top | T1 held |
-| Right footswitch: bypass | T2 tapped (or trig 16) |
-| Right footswitch held: LOOP (LATCH dip: it stays) | T2 held; with LOOP on LTCH a hold turns it on and the next off |
-| Both footswitches: CLEAR the memory | T3 (the memory and the echoes) |
-| The modifier toggles | page 3, trig 1-3 (A1-A3), 4-6 (B1-B3), 7 (off); T4 tapped: the modifiers off and back |
+| Tap tempo | T1 tapped: the tempo (SIZE follows it through its division; or trig 15) |
+| Scan, as SCAN at its top | T1 held |
+| Bypass | T2 tapped (or trig 16) |
+| LOOP (with LATCH it stays) | T2 held; with LOOP on LTCH a hold turns it on and the next off |
+| CLEAR the memory | T3 (the memory and the echoes) |
+| The modifier | page 3, trig 1-3 (A1-A3), 4-6 (B1-B3), 7 (off); T4 tapped: the modifiers off and back |
 | IN, OUT, FEED | page 3, trig 8-10 |
-| Dips MANUAL, COLLECT, ALWAYS, LATCH | page 3, trig 11-14 |
-| Dips WIPE, MEMORY DRY | SETUP; T4 held: WIPE while held |
-| DRY KILL | MIX at the top |
-| TRAILS | SETUP's BYPASS: TRAILS or CUT |
-| Ramping dips | page 3's RAMP and SHAP, the RAMP knob |
-| Presets (two on the toggle, 122 by MIDI) | 8: in SETUP a trig key 1-8 saves; FUNC + a trig key 1-8 recalls |
+| MANUAL, COLLECT, ALWAYS, LATCH | page 3, trig 11-14 |
+| WIPE, MEMORY DRY | SETUP; T4 held: WIPE while held |
+| Fully wet | MIX at the top |
+| Trails | SETUP's BYPASS: TRAILS or CUT |
+| Ramping | page 3's RAMP and SHAP, the RAMP knob |
+| Presets | 8: in SETUP a trig key 1-8 saves; FUNC + a trig key 1-8 recalls |
 
 ## MIDI
 
-DigiHabit takes the Habit's CCs (its MIDI manual's chart) that come on the
+DigiHoard takes its MIDI CCs (the chart below) that come on the
 Digitone's auto channel (MIDI CONFIG > CHANNELS > AUTO CHANNEL), through
 core-dn1's `ev_midi_cc`, while its page is open; with SETUP's CC CLOSED on,
 also while it is closed, and with MIDI CC on ANY CH on a track's channel
-too. The Digitone does not apply a CC DigiHabit takes; every other CC goes
+too. The Digitone does not apply a CC DigiHoard takes; every other CC goes
 on to the Digitone. MIDI CONFIG > PORT CONFIG > INPUT FROM has to let them
 in.
 
@@ -205,10 +205,10 @@ in.
 | 19 | SCAN | 26 | CLEAR (both held): any value |
 | 20 | RAMP | 51 | MIDI clock: 0 ignore (CLOCK FREE), 1-127 listen (DIGITONE) |
 | 93 | TAP | 100 | EXPRESSION: the ramped knob's place between its two ends |
-| 102 | 0 bypass, 1-127 on | 27, 28, 29 | DigiHabit's own: MIX; SCAN AUTO (0-63) or MANUAL; COLLECT (from 64) |
+| 102 | 0 bypass, 1-127 on | 27, 28, 29 | DigiHoard's own: MIX; SCAN AUTO (0-63) or MANUAL; COLLECT (from 64) |
 
-For 21-23 the values 0-3 are the Habit's positions; larger values sweep the
-three in thirds. Program changes (the Habit's presets) are not mapped:
+For 21-23 the values 0-3 are the three positions; larger values sweep the
+three in thirds. Program changes (presets) are not mapped:
 core-dn1 passes mods the CCs only.
 
 ## How it is built
@@ -229,10 +229,10 @@ task, on the pedal shell the GAS pedals share.
   compiled for size, and its knob curves are worked out, not tabled).
 - **CPU:** in digikit's emulator, with the factory pattern playing. With the
   synths muted the Digitone's own render is about 17% of each block, and
-  the whole render with DigiHabit open is 30% at the defaults (DigiHabit
+  the whole render with DigiHoard open is 30% at the defaults (DigiHoard
   about 13%), and 38% at the heaviest settings tried (B1's two speed grains
   in IN, SPREAD, SCAN on AUTO at its top with the heads travelling and the
-  memory dry heard: DigiHabit about 21%, 41% for the whole render at its
+  memory dry heard: DigiHoard about 21%, 41% for the whole render at its
   worst block); A2 and B2 in the same setting 38%. The render is compiled
   for size. The emulator's timing tables assume memory without wait
   states, so a unit runs slower: the shell's guard times the whole render
@@ -249,8 +249,8 @@ task, on the pedal shell the GAS pedals share.
 With the SDK and a stock OS file:
 
 ```bash
-python -m elekloader.sdk.build . --stock Digitone_and_Digitone_Keys_OS1.43.syx   # out/digihabit-0.1.elemod
-python -m elekloader.sdk.build . --stock Digitone_and_Digitone_Keys_OS1.44.syx   # out/digihabit-0.1-os1.44.elemod
+python -m elekloader.sdk.build . --stock Digitone_and_Digitone_Keys_OS1.43.syx   # out/digihoard-0.1.1.elemod
+python -m elekloader.sdk.build . --stock Digitone_and_Digitone_Keys_OS1.44.syx   # out/digihoard-0.1.1-os1.44.elemod
 ```
 
 It names no firmware address, so its 1.44 port is empty. It needs core-dn1
@@ -265,7 +265,7 @@ compiled for a computer and fed test signals (`tests.sh`):
 - **On a unit:** tested on a Digitone mk1 by its author: it loads and works
   as expected. It is still a beta.
 
-- **The firmware.** A build with the released core-dn1 3.2 and DigiHabit
+- **The firmware.** A build with the released core-dn1 3.2 and DigiHoard
   passes every stage of the emulator's check against stock on 1.43 and
   1.44, with every screen identical.
 - **The page, the keys, MIDI** (1.43): opened from the Mod Menu, the
@@ -291,23 +291,22 @@ compiled for a computer and fed test signals (`tests.sh`):
   modifier switches (the largest step at a SIZE change 478 against the test
   sine's own 474); the CPU guard.
 
-## What the Habit does that DigiHabit does not
+## Not done (yet)
 
 - **SIZE up to a minute.** The 3-minute memory fills the region, so the echo
   lines hold 2.7 s and SIZE stops at 2.5 s. Longer echoes come from the
   memory itself: FEED with SCAN on MANUAL makes a loop as long as the
   distance back plus SIZE, up to 3 minutes.
-- **Several knobs ramped at once**, the ramp's polarity dip, CV and an
+- **Several knobs ramped at once**, a polarity switch for the ramp, CV and an
   expression pedal on any knob: here RAMP moves one knob (the expression CC
-  takes the ramp's place), and LEVEL keeps its own knob instead of turning
-  into RAMP's speed.
-- **122 presets and program changes**, the preset toggle, DRY KILL's SERIES
-  option, and TRAILS's finer points (re-engaging while the trails ring out
+  takes the ramp's place), and the level keeps its own knob instead of
+  turning into RAMP's speed.
+- **122 presets and program changes**, a preset switch, a series option
+  for fully wet, and the trails' finer points (re-engaging while the trails ring out
   always clears them here, except with COLLECT or ALWAYS).
 - **The exact curves.** The modifiers' ranges, the speed steps (noon is 1x
-  here; the Habit's manual draws a stop in the middle), AUTO's odds and how
-  far it reaches, and SPREAD's steps are read from the manual's
-  descriptions, not measured from a Habit.
+  here, not a stop), AUTO's odds and how far it reaches, and SPREAD's steps
+  are worked out from written descriptions, not measured.
 
 ## Licence
 

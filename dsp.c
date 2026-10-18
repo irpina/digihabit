@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later */
-/* DigiHabit's render: a Habit-style echo collector. core-dn1 calls it at interrupt level for every block while the
- * page is open (the pedal shell, pedal_dsp.inc, around fx_block). As the Habit's signal flow:
+/* DigiHoard's render: an echo collector. core-dn1 calls it at interrupt level for every block while the
+ * page is open (the pedal shell, pedal_dsp.inc, around fx_block). The signal flow:
  *   MEMORY  the inputs (mono) go into a 3-minute memory, always while the pedal is on (with COLLECT it overdubs
  *           what was there 3 minutes ago; with ALWAYS it records while bypassed too)
  *   HEADS   two play heads read the memory: the primary at SCAN's distance back (MANUAL: the knob picks it; AUTO:
@@ -16,10 +16,10 @@
  * The memory is 8,640,000 frames of s16; positions in it are Q6 frames (8.6M x 64 fits an s32). The lines are
  * 2^17 frames of two s16 channels at half scale; their positions Q8. Fixed point as the shell's. */
 #pragma GCC optimize ("Os", "no-tree-loop-distribute-patterns")
-#include "dhabit.h"
+#include "dhoard.h"
 #include "tables.h"
 
-#define PD_MIX  (-1)                                    /* DigiHabit mixes the dry itself: MIX */
+#define PD_MIX  (-1)                                    /* DigiHoard mixes the dry itself: MIX */
 #define PD_OUT  S_OUT
 #include "pedal_dsp.inc"
 
